@@ -102,41 +102,63 @@ button {
     color: #B22222;
 }
 
-/* Phone layout */
+
+/* ################ PHONE LAYOUT ################ */
+
 @media (max-width: 600px) {
 
+    /* Overall page spacing */
     body {
         margin: 5px;
     }
 
+    /* Song input box */
+    #guessInput {
+        display: block;
+        width: 90%;
+        max-width: 300px;
+        box-sizing: border-box;
+        margin: 10px auto;
+    }
+
+    /* Guess and Give Up buttons */
+    #guessButton,
+    #giveUpButton {
+        display: inline-block;
+        width: 85px;
+        height: 35px;
+        padding: 5px;
+        margin: 5px;
+
+        font-size: 12px;
+        border-radius: 0;
+        -webkit-appearance: none;
+        appearance: none;
+        vertical-align: middle;
+    }
+
+    /* Three equal-width album columns */
     #albumGrid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 5px;
     }
 
+    /* Individual album containers */
     .album {
         min-width: 0;
         padding: 3px;
     }
 
+    /* Album titles */
     .album h2 {
         font-size: 12px;
     }
 
+    /* Song boxes */
     .song {
         font-size: 10px;
         padding: 4px;
         overflow-wrap: anywhere;
-    }
-    
-    /* Make both buttons the same size */
-    #guessButton,
-    #giveUpButton {
-        width: 80px;
-        height: 35px;
-        font-size: 12px;
-        margin: 5px 2px;
-        vertical-align: middle;
     }
 
 }
