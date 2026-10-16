@@ -128,5 +128,16 @@ button {
         padding: 4px;
         overflow-wrap: anywhere;
     }
+    
+    /* Make both buttons the same size */
+    #guessButton,
+    #giveUpButton {
+        width: 80px;
+        height: 35px;
+        font-size: 12px;
+        margin: 5px 2px;
+        vertical-align: middle;
+    }
+
 }
 
