@@ -161,7 +161,16 @@ button {
         padding: 4px;
         overflow-wrap: anywhere;
     }
+    
+    .hintBox {
+    font-size: 9px;
+    padding: 3px;
+}
 
+    .hintRow .song {
+        font-size: 9px;
+        padding: 3px;
+    }
 }
 
 /* Footer */
@@ -180,3 +189,47 @@ footer p {
 footer p:last-child {
     font-size: 10px;
 }
+
+
+
+/* Hint and song side-by-side */
+.hintRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 4px;
+    align-items: stretch;
+}
+
+/* Gold hint boxes */
+.hintBox {
+    background-color: #CBBDB6;
+    color: black;
+    text-align: center;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-wrap: anywhere;
+    min-width: 0;
+}
+
+/* Grey answer boxes */
+.hintRow .song {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+
+    height: auto;
+    min-height: 0;
+    min-width: 0;
+    margin: 0;
+    padding: 5px;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+}
+

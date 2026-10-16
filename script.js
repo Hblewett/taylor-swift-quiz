@@ -1,5 +1,6 @@
 
 const albums = [
+    //Debut
     {
         name: "Taylor Swift",
         color: "#79A889",
@@ -17,7 +18,7 @@ const albums = [
             "Stay Beautiful",
             { title: "Should've Said No",
                 aliases: ["shouldve said no"]},
-            { title: "Mary's Song (Oh My My My",
+            { title: "Mary's Song (Oh My My My)",
                 aliases: ["Mary's Song", "Marys song"]},
             "Our Song",
             { title: "I'm Only Me When I'm With You",
@@ -29,6 +30,8 @@ const albums = [
                 aliases: ["teardrops on my guitar", "tomg"]}
         ]
     },
+    
+    //Fearless
     {
         name: "Fearless",
         color: "#D6B85A",
@@ -69,9 +72,13 @@ const albums = [
                 aliases: ["that's when", "thats when"]},
             { title: "Don't You",
                 aliases: ["dont you"]},
-            "Bye Bye Baby"
+            "Bye Bye Baby",
+            { title: "If This Was a Movie",
+                aliases: ["itwam"]}
         ]
     },
+    
+    //Speak Now
     {
         name: "Speak Now",
         color: "#9B78B5",
@@ -104,6 +111,8 @@ const albums = [
             "Timeless"
         ]
     },
+    
+    //Red
     {
         name: "Red",
         color: "#B5545B",
@@ -147,12 +156,14 @@ const albums = [
                 aliases: ["I bet you think about me", "ibytam"]},
             "Forever Winter",
             "Run",
-            { title: "The Very First Time",
-                aliases: ["tvft"]},
+            { title: "The Very First Night",
+                aliases: ["tvfn"]},
             { title: "All Too Well (10 Minute Version)",
                 aliases: ["ATWTMV"]}
         ]
     },
+    
+    //1989
     {
         name: "1989",
         color: "#8BBBD5",
@@ -192,6 +203,8 @@ const albums = [
                 aliases: ["bad blood"]}
         ]
     },
+    
+    //Reputation
     {
         name: "reputation",
         color: "#555555",
@@ -222,6 +235,8 @@ const albums = [
                 aliases: ["new years day"]}
         ]
     },
+
+    //Lover
     {
         name: "Lover",
         color: "#E9A5BE",
@@ -251,10 +266,13 @@ const albums = [
                 aliases: ["me", "me!"]},
             { title: "It's Nice To Have A Friend",
                 aliases: ["its nice to have a friend", "inthaf"]},
-            "Daylight"
-            
+            "Daylight",
+            { title: "All of the Girls You Loved Before",
+                aliases: ["aotgylb"]}
         ]
     },
+
+    //folklore
     {
         name: "folklore",
         color: "#A0A0A0",
@@ -282,9 +300,10 @@ const albums = [
             { title: "the lakes - bonus track",
                 aliases: ["the lakes"]}            
         ]
-    },
-    
-{
+    },  
+
+    //evermore
+    {
         name: "evermore",
         color: "#B48761",
         songs: [
@@ -314,6 +333,7 @@ const albums = [
         ]
     },
 
+    //Midnigts
     {
         name: "Midnights",
         color: "#354B80",
@@ -351,6 +371,8 @@ const albums = [
                 aliases: ["karma", "kfis"] }
         ]
     },
+
+    //TTPD
     {
         name: "THE TORTURED POETS DEPARTMENT",
         color: "#8E877F",
@@ -404,6 +426,8 @@ const albums = [
             "The Manuscript"
         ]
     },
+
+    //The Life of a Showgirl
     {
         name: "The Life of a Showgirl",
         color: "#DB873D",
@@ -431,6 +455,8 @@ const albums = [
             "Babylon"
         ]
     },
+
+    //The Holiday Collection
     {
         name: "The Taylor Swift Holiday Collection",
         color: "#A63D40",
@@ -442,45 +468,196 @@ const albums = [
             "Silent Night",
             { title: "Christmas Must Be Something More",
                 aliases: ["cmbsm"]},
-            "White Christmas"
+            "White Christmas",
+            "Christmas Tree Farm"
+        ]
+    },
+
+    //Beautiful Eyes
+    {
+        name: "Beautiful Eyes",
+        color: "#77BFC1",
+        songs: [
+            "Beautiful Eyes",
+            { title: "Should've Said No (Alternate Version)",
+                aliases: ["shouldve said no"]},
+            { title: "Teardrops on My Guitar (Acoustic Version)",
+                aliases: ["teardrops on my guitar", "tomg"]},
+            { title: "Picture to Burn (Radio Edit)",
+                aliases: ["picture to burn"]},
+            { title: "I'm Only Me When I'm With you",
+                aliases: ["im only me when im with you", "iomwiwy"]},
+            "I Heart ?"
+
+        ]
+    },
+
+    //Movies / Soundtracks
+    {
+        name: "Movies / Soundtracks",
+        color: "#DDB8E8",
+        songs: [
+            {
+                title: "Crazier",
+                hint: "Hannah Montana: The Movie (2009)"
+            },
+            {
+                title: "Today Was A Fairytale",
+                aliases: ["twaf"],
+                hint: "Valentine's Day (2010)"
+            },
+            {
+                title: "Safe & Sound",
+                aliases: ["safe and sound"],
+                hint: "The Hunger Games (2012)"
+            },
+            {
+                title: "Eyes Open",
+                hint: "The Hunger Games (2012)"
+            },
+            {
+                title: "Sweeter Than Fiction",
+                hint: "One Chance (2013)"
+            },
+            {
+                title: "I Don't Wanna Live Forever",
+                aliases: ["I dont wanna live forever", "idwlf"],
+                hint: "Fifty Shades Darker (2017)"
+            },
+            {
+                title: "Beautiful Ghosts",
+                hint: "Cats (2019)"
+            },
+            {
+                title: "Macavity",
+                hint: "Cats (2019)"
+            },
+            {
+                title: "Only The Young",
+                hint: "Miss Americana (2020)"
+            },
+            {
+                title: "Carolina",
+                hint: "Where The Crawdads Sing (2022)"
+            },
+            {
+                title: "I Knew It, I Knew You",
+                aliases: ["I knew it I knew you", "IKIKY"],
+                hint: "Toy Story 5 (2026)"
+            }
+        ]
+    },
+
+    //Features
+    {
+        name: "Features",
+        color: "#DDB8E8",
+        songs: [
+            {
+                title: "Best Days of Your Life",
+                alias: ["bdoyl"],
+                hint: "Kellie Pickler (2008)"
+            },
+            {
+                title: "Half Of My Heart",
+                aliases: ["homh"],
+                hint: "John Mayer (2009)"
+            },
+            {
+                title: "Two Is Better Than One",
+                aliases: ["tibto"],
+                hint: "BOYS LIKE GIRLS (2009)"
+            },
+            {
+                title: "Both Of Us",
+                hint: "B.o.B (2012)"
+            },
+            {
+                title: "Highway Don't Care",
+                aliases: ["highway dont care"],
+                hint: "Tim McGraw (2013)"
+            },
+            {
+                title: "Babe",
+                hint: "Sugarland (2018)"
+            },
+            {
+                title: "Gasoline",
+                hint: "HAIM"
+            },
+            {
+                title: "Birch",
+                hint: "Big Red Machine (2021)"
+            },
+            {
+                title: "Renegade",
+                hint: "Big Red Machine (2021)"
+            },
+            {
+                title: "The Joker and The Queen",
+                aliases: ["tjatq"],
+                hint: "Ed Sheeran (2022)"
+            },
+            {
+                title: "The Alcott",
+                hint: "The National"
+            },
+            {
+                title: "us.",
+                hint: "Gracie Abrams (2024)"
+            }
+        ]
+    },
+
+    //Written by Taylor
+    {
+        name: "Written by Taylor",
+        color: "#DDB8E8",
+        songs: [
+            {
+                title: "This Is Really Happening",
+                aliases: ["TIRH"],
+                hint: "Britini Hoover (2007)"
+            },
+            {
+                title: "Best Days of Your Life",
+                alias: ["bdoyl"],
+                hint: "Kellie Pickler (2008)"
+            },
+            {
+                title: "Bein' With My Baby",
+                aliases: ["bein with my baby"],
+                hint: "Shea Fisher (2009)"
+            },
+            {
+                title: "You'll Always Find Your Way Back Home",
+                aliases: ["youll always find your way back home", "yafywbh"],
+                hint: "Hannah Montana / Miley Cyrus (2009)"
+            },
+            {
+                title: "Permanent Marker",
+                hint: "Mary Sarah (2010)"
+            },
+            {
+                title: "Better Man",
+                hint: "Little Big Town (2016)"
+            },
+            {
+                title: "This Is What You Came For",
+                aliases: ["TIWYCF"],
+                hint: "Calvin Harris feat. Rihanna (2016)"
+            },
+            {
+                title: "Babe",
+                hint: "Sugarland (2018)"
+            }
         ]
     }
 
 ];
 
 
-
-
- 
- /*
- // TEST ONLY: Guess every song except the last one
-albums.forEach(album => {
-    album.songs.forEach(song => {
-        const title = typeof song === "string" ? song : song.title;
-
-        if (title !== "Babylon") {
-            guessedSongs.push(title);
-        }
-    });
-});
-*/
-/*
- // TEST ONLY: Complete reputation except for one song
-const testAlbum = albums.find(album => album.name === "reputation");
-
-testAlbum.songs.forEach(song => {
-    const title = typeof song === "string" ? song : song.title;
-
-    if (title !== "Dress") {
-        guessedSongs.push(title);
-    }
-});
-
-*/
-
 let guessedSongs = [];
-
-
 const completedAlbums = [];
 let gaveUp = false;
 let gameWon = false;
@@ -542,8 +719,27 @@ function displayAlbums() {
             songBox.textContent = (index + 1) + ".";
         }
 
+        if (typeof song === "object" && song.hint) {
 
-        column.appendChild(songBox);
+            // Put the hint beside the song
+            const row = document.createElement("div");
+            row.className = "hintRow";
+
+            const hintBox = document.createElement("div");
+            hintBox.className = "hintBox";
+            hintBox.textContent = song.hint;
+
+            row.appendChild(hintBox);
+            row.appendChild(songBox);
+            column.appendChild(row);
+
+        } else {
+
+            // Regular albums stay unchanged
+            column.appendChild(songBox);
+
+        }
+
     });
 
         grid.appendChild(column);
@@ -610,6 +806,8 @@ function celebrateWin() {
 
 function checkGuess() {
 
+    let newSongAdded = false;
+
     if (gaveUp || gameWon) return;
     const input = document.getElementById("guessInput");
     const guess = input.value.trim().toLowerCase();
@@ -622,7 +820,7 @@ function checkGuess() {
 
              // Get the title and possible alternative guesses
             const title = typeof song === "string" ? song : song.title;
-            const aliases = typeof song === "string" ? [] : song.aliases;
+            const aliases = typeof song === "string" ? [] : (song.aliases || []);
 
              // Check the title and all aliases
              const validGuesses = [title, ...aliases];
@@ -632,8 +830,10 @@ function checkGuess() {
                 correctGuess = true;
 
                 if (!guessedSongs.includes(title)) {
-                     guessedSongs.push(title);
+                    guessedSongs.push(title);
+                    newSongAdded = true;
                 }
+
             }
         });
 
@@ -681,10 +881,15 @@ function checkGuess() {
     }
 
     const message = document.getElementById("guessMessage");
-
-    if (correctGuess) {
+    
+    if (newSongAdded) {
         input.value = "";
         message.textContent = "";
+
+    } else if (correctGuess) {
+        input.value = "";
+        message.textContent = "Song already guessed!";
+
     } else {
         message.textContent = "Song not found!";
     }
@@ -699,7 +904,7 @@ function giveUp() {
     if (!confirm("Are you sure you want to give up? All remaining songs will be revealed.")) {
         return;
     }
-    
+
     gaveUp = true;
 
     // Reveal all remaining songs
@@ -787,6 +992,14 @@ function loadProgress() {
 
 }
 
+/* Reset the game */
+function resetGame() {
+    if (confirm("Are you sure you want to reset? All your guesses will be lost.")) {
+        localStorage.removeItem("taylorSwiftGuesses");
+        localStorage.removeItem("taylorSwiftGaveUp");
+        location.reload();
+    }
+}
 
 loadProgress();
 
@@ -803,16 +1016,6 @@ document.getElementById("guessInput")
 
 document.getElementById("giveUpButton")
     .addEventListener("click", giveUp);
-
-
-/* Reset the game */
-function resetGame() {
-    if (confirm("Are you sure you want to reset? All your guesses will be lost.")) {
-        localStorage.removeItem("taylorSwiftGuesses");
-        localStorage.removeItem("taylorSwiftGaveUp");
-        location.reload();
-    }
-}
 
 document.getElementById("resetButton")
     .addEventListener("click", resetGame);
