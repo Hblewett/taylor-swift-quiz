@@ -123,7 +123,8 @@ button {
 
     /* Guess and Give Up buttons */
     #guessButton,
-    #giveUpButton {
+    #giveUpButton,
+    #resetButton {
         display: inline-block;
         width: 85px;
         height: 35px;

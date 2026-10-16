@@ -434,7 +434,7 @@ const albums = [
 
 ];
 
-const guessedSongs = [];
+
 
 
  
@@ -464,6 +464,8 @@ testAlbum.songs.forEach(song => {
 
 */
 
+let guessedSongs = [];
+
 
 const completedAlbums = [];
 let gaveUp = false;
@@ -472,6 +474,11 @@ let gameWon = false;
 const totalSongs = albums.reduce((total, album) => {
     return total + album.songs.length;
 }, 0);
+
+// Save the player's progress
+function saveProgress() {
+    localStorage.setItem("taylorSwiftGuesses", JSON.stringify(guessedSongs));
+}
 
 
 function displayAlbums() {
@@ -589,7 +596,7 @@ function celebrateWin() {
 
 function checkGuess() {
 
-    if (gaveUp) return;
+    if (gaveUp || gameWon) return;
     const input = document.getElementById("guessInput");
     const guess = input.value.trim().toLowerCase();
     let correctGuess = false;
@@ -636,7 +643,9 @@ function checkGuess() {
             launchConfetti(album.color);
         }
     });
-
+    
+    // Save progress
+    saveProgress();
 
     // Update the grid
     displayAlbums();
@@ -680,12 +689,77 @@ function giveUp() {
     // Display a message
     document.getElementById("guessMessage").textContent =
         "Game Over!";
+
+    localStorage.setItem("taylorSwiftGaveUp", "true");
 }
 
 
-displayAlbums();
-document.getElementById("score").textContent =
-    "Score: 0 / " + totalSongs;
+/* Restore saved progress when the game opens */
+function loadProgress() {
+    try {
+        const saved = JSON.parse(localStorage.getItem("taylorSwiftGuesses"));
+
+        if (Array.isArray(saved)) {
+            guessedSongs = saved.filter(title =>
+                albums.some(album =>
+                    album.songs.some(song =>
+                        (typeof song === "string" ? song : song.title) === title
+                    )
+                )
+            );
+        }
+    } catch (error) {
+        console.log("Could not restore saved progress.");
+    }
+
+    // Mark completed albums without launching confetti
+    albums.forEach(album => {
+        const allGuessed = album.songs.every(song => {
+            const title = typeof song === "string" ? song : song.title;
+            return guessedSongs.includes(title);
+        });
+
+        if (allGuessed) {
+            completedAlbums.push(album.name);
+        }
+    });
+
+    // Restore a completed game
+    if (guessedSongs.length === totalSongs) {
+        gameWon = true;
+
+        document.getElementById("guessMessage").textContent =
+            "✨ YOU'RE A MASTERMIND! ✨";
+        document.getElementById("guessMessage").classList.add("victory");
+
+        document.getElementById("guessInput").disabled = true;
+        document.getElementById("guessButton").disabled = true;
+        document.getElementById("giveUpButton").disabled = true;
+    }
+
+    
+    // Restore Give Up status
+    if (localStorage.getItem("taylorSwiftGaveUp") === "true") {
+        gaveUp = true;
+
+        document.getElementById("guessInput").disabled = true;
+        document.getElementById("guessButton").disabled = true;
+        document.getElementById("giveUpButton").disabled = true;
+
+        document.getElementById("guessMessage").textContent =
+            "Game Over!";
+    }
+
+    // Display saved songs
+    displayAlbums();
+
+    // Restore the score
+    document.getElementById("score").textContent =
+        "Score: " + guessedSongs.length + " / " + totalSongs;
+}
+
+
+loadProgress();
 
 document.getElementById("guessButton")
     .addEventListener("click", checkGuess);
@@ -700,3 +774,17 @@ document.getElementById("guessInput")
 
 document.getElementById("giveUpButton")
     .addEventListener("click", giveUp);
+
+
+/* Reset the game */
+function resetGame() {
+    if (confirm("Are you sure you want to reset? All your guesses will be lost.")) {
+        localStorage.removeItem("taylorSwiftGuesses");
+        localStorage.removeItem("taylorSwiftGaveUp");
+        location.reload();
+    }
+}
+
+document.getElementById("resetButton")
+    .addEventListener("click", resetGame);
+
