@@ -101,3 +101,32 @@ button {
     background-color: #F8D7DA;
     color: #B22222;
 }
+
+/* Phone layout */
+@media (max-width: 600px) {
+
+    body {
+        margin: 5px;
+    }
+
+    #albumGrid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 5px;
+    }
+
+    .album {
+        min-width: 0;
+        padding: 3px;
+    }
+
+    .album h2 {
+        font-size: 12px;
+    }
+
+    .song {
+        font-size: 10px;
+        padding: 4px;
+        overflow-wrap: anywhere;
+    }
+}
+
