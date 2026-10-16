@@ -12,6 +12,46 @@
 
 
 <body>
+
+    
+    <!-- How to Play Button -->
+    <button id="helpButton" onclick="showHelp()" aria-label="How to play">?</button>
+
+    <!-- How to Play Popup -->
+    <div id="helpOverlay" class="helpOverlay"
+        onclick="if (event.target === this) closeHelp()">
+
+        <div class="helpCard">
+
+            <button class="helpClose" onclick="closeHelp()" aria-label="Close instructions">×</button>
+
+            <h2>How to Play</h2>
+
+            <p>How many Taylor Swift songs can you name?</p>
+
+            <ul>
+                <li>Type a song title into the guess box and press Enter or the Guess button.</li>
+                <li>Correct guesses will automatically appear in their album!</li>
+                <li>Some songs appear in multiple albums or categories. One guess can fill multiple spots.</li>
+                <li>All song titles with 4 or more words can be entered using acronyms (e.g., ATWTMV for All Too Well (10 Minute Version)).</li>
+                <li>Punctuation and symbols (commas, periods, apostrophes, question marks, etc.) are optional.</li>
+                <li>Featured artists do not need to be included in your guesses.</li>
+            </ul>
+
+            <h3>Buttons</h3>
+
+            <ul>
+                <li><strong>Guess:</strong> Submit a song title.</li>
+                <li><strong>Give Up:</strong> End the quiz, reveal missing songs, and see your results.</li>
+                <li><strong>Reset:</strong> Start over and erase your progress.</li>
+                <li><strong>Share Results:</strong> Share your final score with friends.</li>
+            </ul>
+
+            <p class="helpNote">Your progress is automatically saved in your browser.</p>
+
+        </div>
+    </div>
+
     <h1>Taylor Swift Song Quiz</h1>
     <p>Guess all the songs!</p>
 
@@ -44,7 +84,8 @@
     </div>
     
     <!-- Give Up Results Popup -->
-    <div id="summaryOverlay" class="summaryOverlay">
+    <div id="summaryOverlay" class="summaryOverlay"
+     onclick="if(event.target === this) minimizeSummary()">
         <div class="summaryCard">
 
             <button class="summaryClose"
@@ -55,6 +96,10 @@
             <h3 id="summaryTotal"></h3>
 
             <div id="summaryAlbums"></div>
+            
+            <button class="shareResults" onclick="shareSummary()">
+                Share Results
+            </button>
 
         </div>
     </div>

@@ -4,6 +4,7 @@ const albums = [
     {
         name: "Taylor Swift",
         color: "#79A889",
+        image: "images/taylorswift.png",
         songs: [
             "Tim McGraw",
             "Picture to Burn",
@@ -22,7 +23,7 @@ const albums = [
                 aliases: ["Mary's Song", "Marys song"]},
             "Our Song",
             { title: "I'm Only Me When I'm With You",
-                aliases: ["Om only me when im with you", "iomwiwy"]},
+                aliases: ["im only me when im with you", "iomwiwy"]},
             "Invisible",
             { title: "A Perfectly Good Heart",
                 aliases: ["apgh"]},
@@ -35,6 +36,7 @@ const albums = [
     {
         name: "Fearless",
         color: "#D6B85A",
+        image: "images/fearless.png",
         songs: [
             "Fearless",
             "Fifteen",
@@ -82,6 +84,7 @@ const albums = [
     {
         name: "Speak Now",
         color: "#9B78B5",
+        image: "images/speaknow.png",
         songs: [
             "Mine",
             "Sparks Fly",
@@ -116,6 +119,7 @@ const albums = [
     {
         name: "Red",
         color: "#B5545B",
+        image: "images/red.png",
         songs: [
             "State Of Grace",
             "Red",
@@ -167,6 +171,7 @@ const albums = [
     {
         name: "1989",
         color: "#8BBBD5",
+        image: "images/1989.png",
         songs: [
             { title: "Welcome To New York",
                 aliases: ["wtny"]},
@@ -208,6 +213,7 @@ const albums = [
     {
         name: "reputation",
         color: "#555555",
+        image: "images/reputation.png",
         songs: [
             { title: "...Ready For It?",
                 aliases: ["ready for it"]},
@@ -240,6 +246,7 @@ const albums = [
     {
         name: "Lover",
         color: "#E9A5BE",
+        image: "images/lover.png",
         songs: [
             { title: "I Forgot That You Existed",
                 aliases: ["iftye"]},
@@ -276,6 +283,7 @@ const albums = [
     {
         name: "folklore",
         color: "#A0A0A0",
+        image: "images/folklore.png",
         songs: [
             { title: "the 1",
                 aliases: ["the one"]},
@@ -306,6 +314,7 @@ const albums = [
     {
         name: "evermore",
         color: "#B48761",
+        image: "images/evermore.png",
         songs: [
             "willow",
             "champagne problems",
@@ -337,6 +346,7 @@ const albums = [
     {
         name: "Midnights",
         color: "#354B80",
+        image: "images/midnights.png",
         songs: [
             "Lavender Haze",
             "Maroon",
@@ -378,6 +388,7 @@ const albums = [
     {
         name: "THE TORTURED POETS DEPARTMENT",
         color: "#8E877F",
+        image: "images/ttpd.png",
         songs: [
             { title: "Fortnight (feat. Post Malone)",
                 aliases: ["fortnight", "ffpm"] },
@@ -432,7 +443,8 @@ const albums = [
     //The Life of a Showgirl
     {
         name: "The Life of a Showgirl",
-        color: "#DB873D",
+        color: "#5BAFA9",
+        image: "images/thelifeofashowgirl.png",
         songs: [
             { title: "The Fate of Ophelia",
                 aliases: ["tfoo"] },
@@ -461,7 +473,8 @@ const albums = [
     //The Holiday Collection
     {
         name: "The Taylor Swift Holiday Collection",
-        color: "#A63D40",
+        color: "#D21404",
+        image: "images/holiday.png",
         songs: [
             "Last Christmas",
             {title: "Christmases When You Were Mine",
@@ -478,7 +491,8 @@ const albums = [
     //Beautiful Eyes
     {
         name: "Beautiful Eyes",
-        color: "#77BFC1",
+        color: "#FFAA4D",
+        image: "images/beautifuleyes.png",
         songs: [
             "Beautiful Eyes",
             { title: "Should've Said No (Alternate Version)",
@@ -685,10 +699,27 @@ function displayAlbums() {
         column.className = "album";
 
         const heading = document.createElement("h2");
-        heading.textContent = album.name;
 
-        // Set the album heading colour
+        // Set album heading colour
         heading.style.backgroundColor = album.color;
+
+        if (album.image) {
+
+            // Use album title image
+            const titleImage = document.createElement("img");
+            titleImage.src = album.image;
+            titleImage.alt = album.name;
+            titleImage.className = "albumTitleImage";
+
+            heading.appendChild(titleImage);
+
+        } else {
+
+            // Use regular text if no image exists
+            heading.textContent = album.name;
+
+        }
+
         column.appendChild(heading);
 
         // Count guessed songs in this album
@@ -855,11 +886,91 @@ function minimizeSummary() {
     document.getElementById("reopenSummary").style.display = "block";
 }
 
+/* Share quiz results */
+async function shareSummary() {
+
+    let totalGuessed = 0;
+    let totalSongs = 0;
+
+    let results = "🎵 Taylor Swift Song Quiz 🎵\n\n";
+
+    albums.forEach(album => {
+
+        const guessed = album.songs.filter(song => {
+            const title = typeof song === "string"
+                ? song
+                : song.title;
+
+            return guessedSongs.includes(title);
+        }).length;
+
+        totalGuessed += guessed;
+        totalSongs += album.songs.length;
+
+        results += album.name + ": " +
+            guessed + "/" + album.songs.length + "\n";
+    });
+
+    const percent = Math.round(totalGuessed / totalSongs * 100);
+
+    results += "\nScore: " + totalGuessed + "/" +
+        totalSongs + " (" + percent + "%)\n\n";
+
+    results += "Can you beat my score?\n";
+    results += "https://hblewett.github.io/taylor-swift-quiz/";
+
+    // Open sharing options on supported devices
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                text: results
+            });
+        } catch (error) {
+            if (error.name !== "AbortError") {
+                alert("Unable to share results.");
+            }
+        }
+    } else {
+        // Copy results if sharing is unavailable
+        try {
+            await navigator.clipboard.writeText(results);
+            alert("Results copied to clipboard!");
+        } catch (error) {
+            alert("Unable to copy results.");
+        }
+    }
+}
+
+
 
 /* Show album completion popup */
-let albumPopupTimer;
+let albumPopupQueue = [];
+let albumPopupShowing = false;
+
 
 function showAlbumPopup(album) {
+
+    // Add the completed album to the queue
+    albumPopupQueue.push(album);
+
+    // Start showing popups if one isn't already showing
+    if (!albumPopupShowing) {
+        showNextAlbumPopup();
+    }
+}
+
+function showNextAlbumPopup() {
+
+    // Stop when all completed albums have been shown
+    if (albumPopupQueue.length === 0) {
+        albumPopupShowing = false;
+        return;
+    }
+
+    albumPopupShowing = true;
+
+    // Get the next completed album
+    const album = albumPopupQueue.shift();
 
     const popup = document.getElementById("albumPopup");
     const card = document.getElementById("albumPopupCard");
@@ -870,29 +981,28 @@ function showAlbumPopup(album) {
     title.textContent = album.name + " Complete!";
     card.style.backgroundColor = album.color;
 
-    // Show number of completed songs
     count.textContent =
         album.songs.length + "/" +
         album.songs.length + " songs guessed!";
 
-    // Cancel any previous popup timer
-    clearTimeout(albumPopupTimer);
-
-    // Hide the popup before showing it again
-    popup.style.display = "none";
-
-    // Wait 0.7 seconds after confetti begins
-    albumPopupTimer = setTimeout(() => {
+    // Wait for the confetti to start
+    setTimeout(() => {
 
         popup.style.display = "flex";
 
-        // Automatically disappear after 3 seconds
-        albumPopupTimer = setTimeout(() => {
+        // Show this popup for 2 seconds
+        setTimeout(() => {
+
             popup.style.display = "none";
+
+            // Show the next completed album
+            showNextAlbumPopup();
+
         }, 2000);
 
     }, 700);
 }
+
 
 
 function launchConfetti(color, amount = 500) {
@@ -1175,3 +1285,13 @@ document.getElementById("giveUpButton")
 document.getElementById("resetButton")
     .addEventListener("click", resetGame);
 
+
+/* Open How to Play instructions */
+function showHelp() {
+    document.getElementById("helpOverlay").style.display = "flex";
+}
+
+/* Close How to Play instructions */
+function closeHelp() {
+    document.getElementById("helpOverlay").style.display = "none";
+}
