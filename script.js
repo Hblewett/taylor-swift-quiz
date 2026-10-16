@@ -450,7 +450,7 @@ albums.forEach(album => {
     });
 });
 */
-
+/*
  // TEST ONLY: Complete reputation except for one song
 const testAlbum = albums.find(album => album.name === "reputation");
 
@@ -462,7 +462,7 @@ testAlbum.songs.forEach(song => {
     }
 });
 
-
+*/
 
 
 const completedAlbums = [];
