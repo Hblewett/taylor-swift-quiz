@@ -618,3 +618,19 @@ footer p:last-child {
 .helpNote {
     margin-top: 12px;
 }
+
+/* Question mark button on mobile */
+@media (max-width: 600px) {
+    #helpButton {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
+
+    body {
+        padding-top: 35px;
+    }
+}
