@@ -368,7 +368,9 @@ const albums = [
             { title: "Snow On The Beach (feat. More Lana Del Ray)",
                 aliases: ["snow on the beach", "sotb", "sotbfmldr"] },
             { title: "Karma (feat. Ice Spice)",
-                aliases: ["karma", "kfis"] }
+                aliases: ["karma", "kfis"] },
+            { title: "You're Losing Me",
+                aliases: ["youre losing me"]}
         ]
     },
 
@@ -687,64 +689,209 @@ function displayAlbums() {
 
         // Set the album heading colour
         heading.style.backgroundColor = album.color;
-
         column.appendChild(heading);
 
+        // Count guessed songs in this album
+        const guessedCount = album.songs.filter(song => {
+            const title = typeof song === "string" ? song : song.title;
+            return guessedSongs.includes(title);
+        }).length;
 
-        
-    album.songs.forEach((song, index) => {
+        // Create progress bar container
+        const progressContainer = document.createElement("div");
+        progressContainer.className = "albumProgress";
 
-        // Get the song title
-        const title = typeof song === "string" ? song : song.title;
+        // Create coloured progress bar
+        const progressFill = document.createElement("div");
+        progressFill.className = "albumProgressFill";
+        progressFill.style.backgroundColor = album.color;
+        progressFill.style.width =
+            (guessedCount / album.songs.length * 100) + "%";
 
-        const songBox = document.createElement("div");
-        songBox.className = "song";
+        // Create progress count
+        const progressText = document.createElement("span");
+        progressText.className = "albumProgressText";
+        progressText.textContent =
+            guessedCount + "/" + album.songs.length;
 
-         // Check whether this song has been guessed
-        if (guessedSongs.includes(title)) {
+        // Add progress bar beneath album heading
+        progressContainer.appendChild(progressFill);
+        column.appendChild(progressContainer);
+        column.appendChild(progressText);
 
-            // Correctly guessed songs keep their album colour
-            songBox.textContent = (index + 1) + ". " + title;
-            songBox.style.backgroundColor = album.color + "55";
+        album.songs.forEach((song, index) => {
 
-        } else if (gaveUp) {
+            // Get the song title
+            const title = typeof song === "string" ? song : song.title;
 
-            // Reveal missed songs in red
-            songBox.textContent = (index + 1) + ". " + title;
-            songBox.classList.add("missed");
+            const songBox = document.createElement("div");
+            songBox.className = "song";
 
-        } else {
+            // Check whether this song has been guessed
+            if (guessedSongs.includes(title)) {
 
-            // Hide songs that haven't been guessed
-            songBox.textContent = (index + 1) + ".";
-        }
+                // Correctly guessed songs keep their album colour
+                songBox.textContent = (index + 1) + ". " + title;
+                songBox.style.backgroundColor = album.color + "55";
 
-        if (typeof song === "object" && song.hint) {
+            } else if (gaveUp) {
 
-            // Put the hint beside the song
-            const row = document.createElement("div");
-            row.className = "hintRow";
+                // Reveal missed songs in red
+                songBox.textContent = (index + 1) + ". " + title;
+                songBox.classList.add("missed");
 
-            const hintBox = document.createElement("div");
-            hintBox.className = "hintBox";
-            hintBox.textContent = song.hint;
+            } else {
 
-            row.appendChild(hintBox);
-            row.appendChild(songBox);
-            column.appendChild(row);
+                // Hide songs that haven't been guessed
+                songBox.textContent = (index + 1) + ".";
+            }
 
-        } else {
+            if (typeof song === "object" && song.hint) {
 
-            // Regular albums stay unchanged
-            column.appendChild(songBox);
+                // Put the hint beside the song
+                const row = document.createElement("div");
+                row.className = "hintRow";
 
-        }
+                const hintBox = document.createElement("div");
+                hintBox.className = "hintBox";
+                hintBox.textContent = song.hint;
 
-    });
+                row.appendChild(hintBox);
+                row.appendChild(songBox);
+                column.appendChild(row);
+
+            } else {
+
+                // Regular albums stay unchanged
+                column.appendChild(songBox);
+
+            }
+
+        });
 
         grid.appendChild(column);
 
     });
+}
+
+
+/* Show Give Up results */
+function showSummary() {
+
+    const summaryAlbums = document.getElementById("summaryAlbums");
+    const summaryTotal = document.getElementById("summaryTotal");
+
+    summaryAlbums.innerHTML = "";
+
+    let totalGuessed = 0;
+    let totalSongs = 0;
+
+    albums.forEach(album => {
+
+        // Count guessed songs in this album
+        const guessed = album.songs.filter(song => {
+            const title = typeof song === "string"
+                ? song
+                : song.title;
+
+            return guessedSongs.includes(title);
+        }).length;
+
+        const missed = album.songs.length - guessed;
+
+        totalGuessed += guessed;
+        totalSongs += album.songs.length;
+
+        // Create album result
+        const row = document.createElement("div");
+        row.className = "summaryAlbum";
+
+        const info = document.createElement("div");
+        info.className = "summaryAlbumInfo";
+
+        const name = document.createElement("span");
+        name.textContent = album.name;
+
+        const count = document.createElement("span");
+        count.textContent =
+            guessed + " guessed · " + missed + " missed";
+
+        info.appendChild(name);
+        info.appendChild(count);
+
+        // Create progress bar
+        const progress = document.createElement("div");
+        progress.className = "summaryProgress";
+
+        const fill = document.createElement("div");
+        fill.className = "summaryProgressFill";
+        fill.style.backgroundColor = album.color;
+        fill.style.width =
+            (guessed / album.songs.length * 100) + "%";
+
+        progress.appendChild(fill);
+        row.appendChild(info);
+        row.appendChild(progress);
+
+        summaryAlbums.appendChild(row);
+    });
+
+    // Overall score
+    const percent = totalSongs
+        ? Math.round(totalGuessed / totalSongs * 100)
+        : 0;
+
+    summaryTotal.textContent =
+        totalGuessed + " / " + totalSongs +
+        " songs guessed (" + percent + "%)";
+
+    document.getElementById("summaryOverlay").style.display = "flex";
+    document.getElementById("reopenSummary").style.display = "none";
+}
+
+/* Minimize Give Up results */
+function minimizeSummary() {
+    document.getElementById("summaryOverlay").style.display = "none";
+    document.getElementById("reopenSummary").style.display = "block";
+}
+
+
+/* Show album completion popup */
+let albumPopupTimer;
+
+function showAlbumPopup(album) {
+
+    const popup = document.getElementById("albumPopup");
+    const card = document.getElementById("albumPopupCard");
+    const title = document.getElementById("albumPopupTitle");
+    const count = document.getElementById("albumPopupCount");
+
+    // Set album name and colour
+    title.textContent = album.name + " Complete!";
+    card.style.backgroundColor = album.color;
+
+    // Show number of completed songs
+    count.textContent =
+        album.songs.length + "/" +
+        album.songs.length + " songs guessed!";
+
+    // Cancel any previous popup timer
+    clearTimeout(albumPopupTimer);
+
+    // Hide the popup before showing it again
+    popup.style.display = "none";
+
+    // Wait 0.7 seconds after confetti begins
+    albumPopupTimer = setTimeout(() => {
+
+        popup.style.display = "flex";
+
+        // Automatically disappear after 3 seconds
+        albumPopupTimer = setTimeout(() => {
+            popup.style.display = "none";
+        }, 2000);
+
+    }, 700);
 }
 
 
@@ -849,13 +996,19 @@ function checkGuess() {
 
             return guessedSongs.includes(title);
         });
-
-        // Launch confetti only when an album is completed
+        
+        // Celebrate when an album is completed
         if (allGuessed && !completedAlbums.includes(album.name)) {
 
             completedAlbums.push(album.name);
+
+            // Start confetti
             launchConfetti(album.color);
+
+            // Show album completion popup
+            showAlbumPopup(album);
         }
+
     });
     
     // Save progress
@@ -920,6 +1073,8 @@ function giveUp() {
         "Game Over!";
 
     localStorage.setItem("taylorSwiftGaveUp", "true");
+
+    showSummary();
 }
 
 

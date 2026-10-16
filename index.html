@@ -33,5 +33,38 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <!-- Album completion popup -->
+    <div id="albumPopup" class="albumPopup">
+        <div id="albumPopupCard" class="albumPopupCard">
+            <p>✦ ALBUM COMPLETED ✦</p>
+            <h2 id="albumPopupTitle"></h2>
+            <p id="albumPopupCount"></p>
+        </div>
+    </div>
+    
+    <!-- Give Up Results Popup -->
+    <div id="summaryOverlay" class="summaryOverlay">
+        <div class="summaryCard">
+
+            <button class="summaryClose"
+                    onclick="minimizeSummary()"
+                    aria-label="Close results">×</button>
+
+            <h2>Quiz Results</h2>
+            <h3 id="summaryTotal"></h3>
+
+            <div id="summaryAlbums"></div>
+
+        </div>
+    </div>
+
+    <!-- Button to reopen results -->
+    <button id="reopenSummary"
+            onclick="showSummary()"
+            style="display:none;">
+        View Results
+    </button>
+
 </body>
 </html>

@@ -165,7 +165,7 @@ button {
     .hintBox {
     font-size: 9px;
     padding: 3px;
-}
+    }
 
     .hintRow .song {
         font-size: 9px;
@@ -190,8 +190,6 @@ footer p:last-child {
     font-size: 10px;
 }
 
-
-
 /* Hint and song side-by-side */
 .hintRow {
     display: grid;
@@ -201,7 +199,7 @@ footer p:last-child {
     align-items: stretch;
 }
 
-/* Gold hint boxes */
+/* hint boxes */
 .hintBox {
     background-color: #CBBDB6;
     color: black;
@@ -231,5 +229,182 @@ footer p:last-child {
     padding: 5px;
     box-sizing: border-box;
     overflow-wrap: anywhere;
+}
+
+
+/* Album progress bar */
+.albumProgress {
+    width: 100%;
+    height: 8px;
+    background-color: #E5E5E5;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+/* Coloured portion of the progress bar */
+.albumProgressFill {
+    height: 100%;
+    width: 0%;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+/* Number of songs guessed */
+.albumProgressText {
+    display: block;
+    text-align: center;
+    font-size: 10px;
+    color: #777;
+    margin: 3px 0 7px;
+}
+
+@media (max-width: 600px) {
+    .albumProgress {
+        height: 6px;
+    }
+
+    .albumProgressText {
+        font-size: 9px;
+    }
+}
+
+
+/* Dark background behind the popup */
+.albumPopup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    pointer-events: none;
+}
+
+/* Album completion card */
+.albumPopupCard {
+    background: white;
+    border-radius: 15px;
+    padding: 30px 20px;
+    width: 100%;
+    max-width: 320px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+    animation: popupAppear 0.3s ease;
+}
+
+.albumPopupCard h2 {
+    font-size: 36px;
+    margin: 15px 0;
+    overflow-wrap: anywhere;
+}
+
+.albumPopupCard p {
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+/* Popup entrance animation */
+@keyframes popupAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Results popup background */
+.summaryOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+/* Results card */
+.summaryCard {
+    position: relative;
+    background: white;
+    color: #333;
+    border-radius: 15px;
+    padding: 25px;
+    width: 100%;
+    max-width: 420px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.summaryCard h2 {
+    margin: 0 0 10px;
+}
+
+/* Small X button */
+.summaryCard .summaryClose {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: transparent;
+    color: #555;
+    border: none;
+    font-size: 26px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Individual album results */
+.summaryAlbum {
+    margin: 15px 0;
+    text-align: left;
+}
+
+.summaryAlbumInfo {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+/* Album progress bars */
+.summaryProgress {
+    height: 9px;
+    background: #e5e5e5;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.summaryProgressFill {
+    height: 100%;
+    border-radius: 10px;
+}
+
+/* Button to reopen results */
+#reopenSummary {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1500;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
 }
 
