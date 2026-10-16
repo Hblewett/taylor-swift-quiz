@@ -430,6 +430,20 @@ const albums = [
             "Pink Clouding",
             "Babylon"
         ]
+    },
+    {
+        name: "The Taylor Swift Holiday Collection",
+        color: "#A63D40",
+        songs: [
+            "Last Christmas",
+            {title: "Christmases When You Were Mine",
+                aliases: ["cwywm"]},
+            "Santa Baby",
+            "Silent Night",
+            { title: "Christmas Must Be Something More",
+                aliases: ["cmbsm"]},
+            "White Christmas"
+        ]
     }
 
 ];
@@ -650,9 +664,14 @@ function checkGuess() {
     // Update the grid
     displayAlbums();
 
-    // Update the score
+    
+    // Update the score and percentage
+    const percentage = (guessedSongs.length / totalSongs * 100).toFixed(1);
+
     document.getElementById("score").textContent =
-    "Score: " + guessedSongs.length + " / " + totalSongs;
+        "Score: " + guessedSongs.length + " / " + totalSongs +
+        " (" + percentage + "%)";
+
     
     // Check for a perfect score
     if (guessedSongs.length === totalSongs && !gaveUp) {
@@ -676,6 +695,11 @@ function checkGuess() {
 
 function giveUp() {
 
+    // Ask for confirmation before giving up
+    if (!confirm("Are you sure you want to give up? All remaining songs will be revealed.")) {
+        return;
+    }
+    
     gaveUp = true;
 
     // Reveal all remaining songs
@@ -753,9 +777,14 @@ function loadProgress() {
     // Display saved songs
     displayAlbums();
 
-    // Restore the score
+    
+    // Restore the score and percentage
+    const percentage = (guessedSongs.length / totalSongs * 100).toFixed(1);
+
     document.getElementById("score").textContent =
-        "Score: " + guessedSongs.length + " / " + totalSongs;
+        "Score: " + guessedSongs.length + " / " + totalSongs +
+        " (" + percentage + "%)";
+
 }
 
 
