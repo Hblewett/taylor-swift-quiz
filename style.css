@@ -1,0 +1,103 @@
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #CFEAF5;
+    margin: 20px;
+}
+
+#guessInput {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#albumGrid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.album {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.song {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #e8e8e8;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.album h2 {
+    color: white;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+
+#guessMessage {
+    color: #c0392b;
+    font-size: 14px;
+    min-height: 20px;
+    margin: 5px;
+}
+
+#guessMessage.victory {
+    color: #9B78B5;
+    font-size: 22px;
+    font-weight: bold;
+    animation: victoryPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes victoryPulse {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.05);
+    }
+}
+
+/* Confetti animation */
+.confetti {
+    position: fixed;
+    top: -20px;
+    width: 10px;
+    height: 15px;
+    pointer-events: none;
+    z-index: 1000;
+
+    animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Songs revealed after giving up */
+.song.missed {
+    background-color: #F8D7DA;
+    color: #B22222;
+}
