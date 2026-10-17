@@ -305,8 +305,7 @@ const albums = [
             "betty",
             "peace",
             "hoax",
-            { title: "the lakes - bonus track",
-                aliases: ["the lakes"]}            
+            "the lakes"                      
         ]
     },  
 
@@ -335,10 +334,10 @@ const albums = [
             "closure",
             { title: "evermore (feat. Bon Iver)",
                 aliases: ["evermore"] },
-            { title: "right where you left me - bonus track",
-                aliases: ["right where you left me", "rwylm", "rwy​lmbt"] },
-            { title: "it's time to go - bonus track",
-                aliases: ["its time to go", "ittg", "ittgbt"] }
+            { title: "right where you left me",
+                aliases: ["rwylm"] },
+            { title: "it's time to go",
+                aliases: ["ittg"] }
         ]
     },
 
@@ -751,10 +750,55 @@ function displayAlbums() {
         column.appendChild(progressText);
 
         album.songs.forEach((song, index) => {
-
-            // Get the song title
+            
+        // Add a gap before specific songs      
+        const sectionStarts = {
+            "Fearless": {
+                "You All Over Me (feat. Maren Morris": "From The Vault"
+            },
+            "Speak Now": {
+                "Electric Touch (feat. Fall Out Boy": "From The Vault"
+            },
+            "Red": {
+                "Ronan": "Bonus Tracks",
+                "Better Man": "From The Vault"
+            },
+            "1989": {
+                "Slut!": "From The Vault"
+            },
+            "folklore": {
+                "the lakes": "Bonus Track"
+            },
+            "evermore": {
+                "right where you left me": "Bonus Tracks"
+            },
+            "Midnights": {
+                "The Great War": "3am Edition",
+                "Hits Different": "The Til Dawn Edition",
+                "You're Losing Me": "From The Vault"
+            },
+            "THE TORTURED POETS DEPARTMENT": {
+                "The Black Dog": "The Anthology"
+            },
+            "The Life of a Showgirl": {
+                "Patient Zero": "Bonus Tracks"
+            },
+            "The Taylor Swift Holiday Collection": {
+                "Christmas Tree Farm": "Holiday Single"
+            }
+        };
+                  
             const title = typeof song === "string" ? song : song.title;
+            const sectionLabel = sectionStarts[album.name]?.[title];
 
+        if (sectionLabel) {
+            const section = document.createElement("div");
+            section.className = "albumSection";
+            section.textContent = sectionLabel;
+            section.style.color = album.color;
+
+            column.appendChild(section);
+        }
             const songBox = document.createElement("div");
             songBox.className = "song";
 
@@ -1038,28 +1082,41 @@ function launchConfetti(color, amount = 500) {
     }
 }
 
-
 function celebrateWin() {
 
     if (gameWon || gaveUp) return;
 
     gameWon = true;
 
-    // Launch rainbow confetti
-    launchConfetti("rainbow", 500);
+    // Wait until the album popup finishes
+    setTimeout(() => {
 
-    // Display the victory message
+        // Rainbow confetti
+        launchConfetti("rainbow", 500);
+
+        // Show the separate final popup
+        const finalPopup = document.getElementById("finalPopup");
+        finalPopup.querySelector(".finalScore").textContent =
+            totalSongs + " / " + totalSongs;
+
+        finalPopup.style.display = "flex";
+
+    }, 3500);
+
+    // Keep the victory message below the input
     document.getElementById("guessMessage").textContent =
         "✨ YOU'RE A MASTERMIND! ✨";
     document.getElementById("guessMessage").classList.add("victory");
 
-    // Stop further guesses
+    // Disable further guesses
     document.getElementById("guessInput").disabled = true;
     document.getElementById("guessButton").disabled = true;
     document.getElementById("giveUpButton").disabled = true;
 }
 
-
+function closeFinalPopup() {
+    document.getElementById("finalPopup").style.display = "none";
+}
 
 function checkGuess() {
 
@@ -1096,6 +1153,14 @@ function checkGuess() {
 
     });
 
+    // Check for a perfect score
+    const allSongsGuessed = albums.every(album =>
+        album.songs.every(song => {
+            const title = typeof song === "string" ? song : song.title;
+            return guessedSongs.includes(title);
+        })
+    );
+
     
     // Check if any albums have been completed
     albums.forEach(album => {
@@ -1109,7 +1174,6 @@ function checkGuess() {
         
         // Celebrate when an album is completed
         if (allGuessed && !completedAlbums.includes(album.name)) {
-
             completedAlbums.push(album.name);
 
             // Start confetti
@@ -1129,19 +1193,26 @@ function checkGuess() {
 
     
     // Update the score and percentage
-    const percentage = (guessedSongs.length / totalSongs * 100).toFixed(1);
+    const filledCount = albums.reduce((total, album) =>
+        total + album.songs.filter(song =>
+            guessedSongs.includes(
+                typeof song === "string" ? song : song.title
+            )
+        ).length, 0
+    );
+
+    const percentage = (filledCount / totalSongs * 100).toFixed(1);
 
     document.getElementById("score").textContent =
-        "Score: " + guessedSongs.length + " / " + totalSongs +
+        "Score: " + filledCount + " / " + totalSongs +
         " (" + percentage + "%)";
 
-    
-    // Check for a perfect score
-    if (guessedSongs.length === totalSongs && !gaveUp) {
+    if (allSongsGuessed && !gaveUp) {
         celebrateWin();
         input.value = "";
         return;
     }
+
 
     const message = document.getElementById("guessMessage");
     
@@ -1267,6 +1338,32 @@ function resetGame() {
 }
 
 loadProgress();
+
+
+/* TEST MODE - Fill in all songs except Babylon */
+guessedSongs = [...new Set(
+    albums.flatMap(album =>
+        album.songs.map(song =>
+            typeof song === "string" ? song : song.title
+        )
+    )
+)].filter(title => title !== "Babylon");
+
+gaveUp = false;
+gameWon = false;
+completedAlbums.length = 0;
+
+albums.forEach(album => {
+    if (album.name !== "The Life of a Showgirl") {
+        completedAlbums.push(album.name);
+    }
+});
+
+displayAlbums();
+
+document.getElementById("score").textContent =
+    "All songs except Babylon guessed!";
+
 
 document.getElementById("guessButton")
     .addEventListener("click", checkGuess);

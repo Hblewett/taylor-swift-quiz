@@ -79,7 +79,7 @@ button {
     width: 10px;
     height: 15px;
     pointer-events: none;
-    z-index: 1000;
+    z-index: 10000;
 
     animation: confettiFall 3s linear forwards;
 }
@@ -201,7 +201,7 @@ footer p:last-child {
 
 /* hint boxes */
 .hintBox {
-    background-color: #CBBDB6;
+    background-color: #ccc;
     color: black;
     text-align: center;
     padding: 5px;
@@ -633,4 +633,144 @@ footer p:last-child {
     body {
         padding-top: 35px;
     }
+}
+
+/* Album section labels */
+.albumSection {
+    margin: 18px 0 10px;
+    padding: 6px 0;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-top: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+}
+
+
+/* Final quiz completion popup */
+.finalPopup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.finalPopupCard {
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+    padding: 42px 28px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #f7d6e8, #e6d8ff, #d3edf1);
+    text-align: center;
+    color: #553b62;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+}
+
+.finalSparkles {
+    font-size: 28px;
+    letter-spacing: 12px;
+    margin-bottom: 18px;
+}
+
+.finalPopupCard h2 {
+    font-size: 27px;
+    line-height: 1.25;
+    margin: 0 0 16px;
+}
+
+.finalSubtitle {
+    font-size: 17px;
+    margin: 0 0 22px;
+}
+
+.finalScore {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.finalFooter {
+    font-size: 14px;
+    margin: 0;
+    opacity: 0.8;
+}
+
+@media (max-width: 480px) {
+    .finalPopupCard {
+        padding: 32px 20px;
+    }
+
+    .finalPopupCard h2 {
+        font-size: 23px;
+    }
+
+    .finalScore {
+        font-size: 30px;
+    }
+}
+
+
+/* Final celebration popup */
+.finalPopup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.finalPopupCard {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+    padding: 42px 28px 32px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #f7d6e8, #e6d8ff, #d3edf1);
+    text-align: center;
+    color: #553b62;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+    animation: none;
+    transform: none;
+}
+
+.finalClose {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    border: none;
+    background: transparent;
+    color: #553b62;
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.finalPopupCard .shareResults {
+    display: inline-block;
+    margin-top: 24px;
+    position: static;
+    transform: none;
+}
+
+@media (max-width: 480px) {
+    .finalPopupCard {
+        padding: 36px 20px 28px;
+    }
+}
+
+/* Prevent horizontal scrolling */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
 }

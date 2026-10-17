@@ -72,14 +72,35 @@
     <p>Last updated: October 16, 2026</p>
     </footer>
 
-    <script src="script.js"></script>
-
     <!-- Album completion popup -->
     <div id="albumPopup" class="albumPopup">
         <div id="albumPopupCard" class="albumPopupCard">
             <p>✦ ALBUM COMPLETED ✦</p>
             <h2 id="albumPopupTitle"></h2>
             <p id="albumPopupCount"></p>
+        </div>
+    </div>
+    
+    <!-- Final quiz completion popup -->
+    <div id="finalPopup" class="finalPopup">
+        <div class="finalPopupCard">
+
+            <button class="finalClose"
+                    onclick="closeFinalPopup()"
+                    aria-label="Close celebration">×</button>
+
+            <div class="finalSparkles">✦ ✧ ✦</div>
+
+            <h2>YOU'RE A MASTERMIND!</h2>
+
+            <p class="finalSubtitle">
+                You've completed every song!
+            </p>
+            <div class="finalScore">298 / 298</div>
+            <button class="shareResults" onclick="shareSummary()">
+                Share Results
+            </button>
+
         </div>
     </div>
     
@@ -110,6 +131,8 @@
             style="display:none;">
         View Results
     </button>
+
+    <script src="script.js"></script>
 
 </body>
 </html>
