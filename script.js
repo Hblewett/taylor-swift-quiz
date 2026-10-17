@@ -1339,31 +1339,7 @@ function resetGame() {
 
 loadProgress();
 
-
-/* TEST MODE - Fill in all songs except Babylon */
-guessedSongs = [...new Set(
-    albums.flatMap(album =>
-        album.songs.map(song =>
-            typeof song === "string" ? song : song.title
-        )
-    )
-)].filter(title => title !== "Babylon");
-
-gaveUp = false;
-gameWon = false;
-completedAlbums.length = 0;
-
-albums.forEach(album => {
-    if (album.name !== "The Life of a Showgirl") {
-        completedAlbums.push(album.name);
-    }
-});
-
 displayAlbums();
-
-document.getElementById("score").textContent =
-    "All songs except Babylon guessed!";
-
 
 document.getElementById("guessButton")
     .addEventListener("click", checkGuess);

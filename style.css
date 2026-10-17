@@ -769,8 +769,29 @@ footer p:last-child {
     }
 }
 
+
 /* Prevent horizontal scrolling */
 html, body {
     max-width: 100%;
     overflow-x: hidden;
 }
+
+
+/* Keep the entire top section fixed */
+.stickyHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 100;
+    background-color: #CFEAF5;
+    padding: 15px;
+    text-align: center;
+}
+
+/* Prevent albums from hiding behind the fixed header */
+#albumGrid {
+    padding-top: 220px;
+}
+
