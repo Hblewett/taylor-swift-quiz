@@ -502,8 +502,8 @@ const albums = [
                 aliases: ["picture to burn"]},
             { title: "I'm Only Me When I'm With you",
                 aliases: ["im only me when im with you", "iomwiwy"]},
-            "I Heart ?"
-
+            { title: "I Heart ?",
+                aliases: ["I heart"]}
         ]
     },
 
