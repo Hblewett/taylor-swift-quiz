@@ -75,7 +75,7 @@ const albums = [
             { title: "Don't You",
                 aliases: ["dont you"]},
             "Bye Bye Baby",
-            { title: "If This Was a Movie",
+            { title: "If This Was A Movie",
                 aliases: ["itwam"]}
         ]
     },
@@ -274,7 +274,7 @@ const albums = [
             { title: "It's Nice To Have A Friend",
                 aliases: ["its nice to have a friend", "inthaf"]},
             "Daylight",
-            { title: "All of the Girls You Loved Before",
+            { title: "All Of The Girls You Loved Before",
                 aliases: ["aotgylb"]}
         ]
     },
@@ -754,7 +754,8 @@ function displayAlbums() {
         // Add a gap before specific songs      
         const sectionStarts = {
             "Fearless": {
-                "You All Over Me (feat. Maren Morris": "From The Vault"
+                "You All Over Me (feat. Maren Morris": "From The Vault",
+                "If This Was A Movie": "The More Fearless Chapter"
             },
             "Speak Now": {
                 "Electric Touch (feat. Fall Out Boy": "From The Vault"
@@ -771,6 +772,9 @@ function displayAlbums() {
             },
             "evermore": {
                 "right where you left me": "Bonus Tracks"
+            },
+            "Lover": {
+                "All Of The Girls You Loved Before": "The More Lover Chapter"
             },
             "Midnights": {
                 "The Great War": "3am Edition",

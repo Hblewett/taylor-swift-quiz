@@ -882,3 +882,10 @@ body{
 .albumSection ~ .album .songNumber {
     display: none;
 }
+
+
+h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+}
