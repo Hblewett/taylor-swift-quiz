@@ -517,11 +517,6 @@ const albums = [
                 hint: "Hannah Montana: The Movie (2009)"
             },
             {
-                title: "Today Was A Fairytale",
-                aliases: ["twaf"],
-                hint: "Valentine's Day (2010)"
-            },
-            {
                 title: "Safe & Sound",
                 aliases: ["safe and sound"],
                 hint: "The Hunger Games (2012)"
@@ -619,6 +614,7 @@ const albums = [
             },
             {
                 title: "us.",
+                aliases: ["us"],
                 hint: "Gracie Abrams (2024)"
             }
         ]
@@ -1048,7 +1044,7 @@ function showNextAlbumPopup() {
             // Show the next completed album
             showNextAlbumPopup();
 
-        }, 2000);
+        }, 3500);
 
     }, 700);
 }
@@ -1063,11 +1059,26 @@ function launchConfetti(color, amount = 500) {
         const piece = document.createElement("div");
         piece.className = "confetti";
 
-        // Use the completed album's colour
-        piece.style.backgroundColor =
-            color === "rainbow"
-                ? albums[Math.floor(Math.random() * albums.length)].color
-                : color;
+        // Choose confetti colours
+        if (color === "christmas") {
+
+            // Alternate randomly between Christmas red and green
+            const christmasColors = ["#D62828", "#228B22"];
+            piece.style.backgroundColor =
+                christmasColors[Math.floor(Math.random() * christmasColors.length)];
+
+        } else if (color === "rainbow") {
+
+            // Use random album colours
+            piece.style.backgroundColor =
+                albums[Math.floor(Math.random() * albums.length)].color;
+
+        } else {
+
+            // Use the completed album's colour
+            piece.style.backgroundColor = color;
+
+        }
 
         // Random horizontal position
         piece.style.left = Math.random() * 100 + "vw";
@@ -1183,7 +1194,11 @@ function checkGuess() {
             completedAlbums.push(album.name);
 
             // Start confetti
-            launchConfetti(album.color);
+            launchConfetti(
+                album.name === "The Taylor Swift Holiday Collection"
+                    ? "christmas"
+                    : album.color
+            );
 
             // Show album completion popup
             showAlbumPopup(album);
