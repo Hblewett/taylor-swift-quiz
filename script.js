@@ -598,7 +598,7 @@ const albums = [
             },
             {
                 title: "Gasoline",
-                hint: "HAIM"
+                hint: "HAIM (2020)"
             },
             {
                 title: "Birch",
@@ -615,7 +615,7 @@ const albums = [
             },
             {
                 title: "The Alcott",
-                hint: "The National"
+                hint: "The National (2023)"
             },
             {
                 title: "us.",
@@ -624,9 +624,9 @@ const albums = [
         ]
     },
 
-    //Written by Taylor
+    //Written For Others
     {
-        name: "Written by Taylor",
+        name: "Written For Others",
         color: "#DDB8E8",
         songs: [
             {
@@ -802,23 +802,25 @@ function displayAlbums() {
             const songBox = document.createElement("div");
             songBox.className = "song";
 
+            /* Remove numbering from Features, Movies, and Written for others */
+            const noNumbers = ["Features", "Movies / Soundtracks", "Written For Others"].includes(album.name);
+
+            const number = noNumbers ? "" : (index + 1) + ". ";
+
             // Check whether this song has been guessed
             if (guessedSongs.includes(title)) {
 
-                // Correctly guessed songs keep their album colour
-                songBox.textContent = (index + 1) + ". " + title;
+                songBox.textContent = number + title;
                 songBox.style.backgroundColor = album.color + "55";
 
             } else if (gaveUp) {
 
-                // Reveal missed songs in red
-                songBox.textContent = (index + 1) + ". " + title;
+                songBox.textContent = number + title;
                 songBox.classList.add("missed");
 
             } else {
 
-                // Hide songs that haven't been guessed
-                songBox.textContent = (index + 1) + ".";
+                songBox.textContent = noNumbers ? "" : (index + 1) + ".";
             }
 
             if (typeof song === "object" && song.hint) {

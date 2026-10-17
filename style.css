@@ -877,3 +877,8 @@ body{
 #guessMessage:empty {
     display: none;
 }
+
+/* Hide song numbers in the extra sections */
+.albumSection ~ .album .songNumber {
+    display: none;
+}
