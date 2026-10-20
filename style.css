@@ -664,7 +664,6 @@ footer p:last-child {
 }
 
 @media (max-width: 480px) {
-    
     .finalPopupCard h2 {
         font-size: 23px;
     }
@@ -834,7 +833,8 @@ h1 {
     /* Smaller bonus track headings */
     .albumSection {
         font-size: 8px;
-        padding: 3px 1px;
+        margin: 4px 0 3px;
+        padding: 1px;
         line-height: 1.1;
         overflow-wrap: break-word;
     }
