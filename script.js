@@ -1413,7 +1413,10 @@ if (stickyHeader && headerPlaceholder) {
         const headerStart =
             headerPlaceholder.getBoundingClientRect().top + window.scrollY;
 
-        const visibleTop = viewport
+        const keyboardOpen =
+            document.activeElement === document.getElementById("guessInput");
+
+        const visibleTop = keyboardOpen && viewport
             ? viewport.offsetTop
             : 0;
 
@@ -1438,6 +1441,11 @@ if (stickyHeader && headerPlaceholder) {
     });
 
     window.addEventListener("resize", updateHeaderPosition);
+
+    document.getElementById("guessInput").addEventListener("blur", () => {
+        stickyHeader.style.top = "0px";
+        updateHeaderPosition();
+    });
 
     if (viewport) {
         viewport.addEventListener("scroll", updateHeaderPosition);
