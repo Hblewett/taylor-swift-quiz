@@ -739,7 +739,8 @@ body {
 
 /* Search controls stay above scrolling content */
 .stickyHeader {
-    position: relative;
+    position: sticky;
+    top: 0;
     flex-shrink: 0;
     z-index: 1000;
     background-color: #CFEAF5;
