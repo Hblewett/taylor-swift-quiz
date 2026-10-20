@@ -771,7 +771,8 @@ function displayAlbums() {
                 "Better Man": "From The Vault"
             },
             "1989": {
-                "Slut!": "From The Vault"
+                "Slut!": "From The Vault",
+                "Bad Blood (feat. Kendrick Lamar)": "Bonus Track"
             },
             "folklore": {
                 "the lakes": "Bonus Track"
@@ -1398,4 +1399,37 @@ function showHelp() {
 /* Close How to Play instructions */
 function closeHelp() {
     document.getElementById("helpOverlay").style.display = "none";
+}
+
+/* Keep quiz controls visible when scrolling, including on mobile */
+const stickyHeader = document.querySelector(".stickyHeader");
+const headerPlaceholder = document.getElementById("headerPlaceholder");
+
+if (stickyHeader && headerPlaceholder) {
+    let headerStart = 0;
+
+    function updateHeaderPosition() {
+        if (!stickyHeader.classList.contains("isFixed")) {
+            headerStart = headerPlaceholder.getBoundingClientRect().top
+                + window.scrollY;
+        }
+
+        if (window.scrollY > headerStart) {
+            headerPlaceholder.style.height =
+                stickyHeader.offsetHeight + "px";
+
+            stickyHeader.classList.add("isFixed");
+        } else {
+            stickyHeader.classList.remove("isFixed");
+            headerPlaceholder.style.height = "0px";
+        }
+    }
+
+    window.addEventListener("scroll", updateHeaderPosition, {
+        passive: true
+    });
+
+    window.addEventListener("resize", updateHeaderPosition);
+
+    updateHeaderPosition();
 }
