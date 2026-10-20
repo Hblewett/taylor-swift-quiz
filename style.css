@@ -740,11 +740,12 @@ body {
 /* Search controls stay above the scrolling albums */
 .stickyHeader {
     position: sticky;
-    top:0;
+    top: 0;
     z-index: 1000;
     background-color: #CFEAF5;
     padding: 5px 10px 8px;
     text-align: center;
+    transform: translateZ(0);
 }
 
 /* Search and button spacing */
