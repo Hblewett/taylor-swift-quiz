@@ -737,29 +737,20 @@ body {
     overflow-x: clip;
 }
 
-/* Quiz header */
+/* Search controls stay above the scrolling albums */
 .stickyHeader {
     position: relative;
-    top: auto;
     z-index: 1000;
     background-color: #CFEAF5;
     padding: 5px 10px 8px;
     text-align: center;
 }
 
-/* Header stays at the top when scrolling */
-.stickyHeader.isFixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* Holds the header's space when fixed */
-.headerPlaceholder {
-    height: 0;
+/* Albums scroll independently */
+#albumScrollArea {
+    height: 65vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Search and button spacing */
@@ -803,6 +794,10 @@ h1 {
 
 /* Phone adjustments */
 @media (max-width: 600px) {
+
+    #albumScrollArea {
+    height: 60dvh;
+    }
 
     .stickyHeader {
         padding: 5px;

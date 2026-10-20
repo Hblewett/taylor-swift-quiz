@@ -1400,35 +1400,3 @@ function showHelp() {
 function closeHelp() {
     document.getElementById("helpOverlay").style.display = "none";
 }
-
-
-/* Keep the quiz header visible while scrolling */
-const stickyHeader = document.querySelector(".stickyHeader");
-const headerPlaceholder = document.getElementById("headerPlaceholder");
-
-if (stickyHeader && headerPlaceholder) {
-
-    const headerStart =
-        headerPlaceholder.getBoundingClientRect().top + window.scrollY;
-
-    function updateHeaderPosition() {
-
-        if (window.scrollY > headerStart) {
-            if (!stickyHeader.classList.contains("isFixed")) {
-                headerPlaceholder.style.height =
-                    stickyHeader.offsetHeight + "px";
-
-                stickyHeader.classList.add("isFixed");
-            }
-        } else {
-            stickyHeader.classList.remove("isFixed");
-            headerPlaceholder.style.height = "0px";
-        }
-    }
-
-    window.addEventListener("scroll", updateHeaderPosition, {
-        passive: true
-    });
-
-    updateHeaderPosition();
-}
