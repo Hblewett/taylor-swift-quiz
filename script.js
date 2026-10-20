@@ -202,7 +202,7 @@ const albums = [
             { title: "Now That We Don't Talk",
                 aliases: ["now that we dont talk", "ntwdt"]},
             "Suburban Legends",
-            { title: "Is It OVer Now?",
+            { title: "Is It Over Now?",
                 aliases: ["is it over now", "iion"]},
             { title: "Bad Blood (feat. Kendrick Lamar)",
                 aliases: ["bad blood"]}
@@ -337,7 +337,7 @@ const albums = [
             { title: "right where you left me",
                 aliases: ["rwylm"] },
             { title: "it's time to go",
-                aliases: ["ittg"] }
+                aliases: ["ittg", "its time to go"] }
         ]
     },
 

@@ -775,7 +775,7 @@ html, body {
     max-width: 100%;
 }
 body{
-    overflow-x: clip;
+    overflow-x: hidden;
 }
 
 
@@ -784,7 +784,7 @@ body{
 .stickyHeader {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
     background-color: #CFEAF5;
     padding: 10px;
     text-align: center;
