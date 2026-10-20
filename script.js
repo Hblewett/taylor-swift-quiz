@@ -673,6 +673,16 @@ const completedAlbums = [];
 let gaveUp = false;
 let gameWon = false;
 
+/* Normalize song titles so different apostrophes work */
+function normalizeTitle(title) {
+    return title
+        .toLowerCase()
+        .trim()
+        .replace(/[\u2018\u2019]/g, "'")
+        .replace(/['"]/g, "")
+        .replace(/\s+/g, " ");
+}
+
 const totalSongs = albums.reduce((total, album) => {
     return total + album.songs.length;
 }, 0);
@@ -1141,7 +1151,7 @@ function checkGuess() {
 
     if (gaveUp || gameWon) return;
     const input = document.getElementById("guessInput");
-    const guess = input.value.trim().toLowerCase();
+    const guess = normalizeTitle(input.value);
     let correctGuess = false;
 
     albums.forEach(album => {
@@ -1156,7 +1166,7 @@ function checkGuess() {
              // Check the title and all aliases
              const validGuesses = [title, ...aliases];
 
-            if (validGuesses.some(name => name.toLowerCase() === guess)) {
+            if (validGuesses.some(name => normalizeTitle(name) === guess)) {
 
                 correctGuess = true;
 
