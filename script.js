@@ -1402,38 +1402,42 @@ function closeHelp() {
 }
 
 
-/* Keep quiz controls visible, including with the iPhone keyboard */
+
+/* Keep quiz controls visible while scrolling */
 const stickyHeader = document.querySelector(".stickyHeader");
 const headerPlaceholder = document.getElementById("headerPlaceholder");
+const guessInput = document.getElementById("guessInput");
 
 if (stickyHeader && headerPlaceholder) {
-    const viewport = window.visualViewport;
+
+    const headerStart =
+        headerPlaceholder.getBoundingClientRect().top + window.scrollY;
+
+    let lastScrollY = window.scrollY;
 
     function updateHeaderPosition() {
-        const headerStart =
-            headerPlaceholder.getBoundingClientRect().top + window.scrollY;
+        const scrollY = window.scrollY;
 
-        const keyboardOpen = viewport &&
-            viewport.height < window.innerHeight - 150;
+        // Close the keyboard when scrolling upward
+        if (scrollY < lastScrollY - 5 &&
+            document.activeElement === guessInput) {
+            guessInput.blur();
+        }
 
-        const visibleTop = keyboardOpen
-            ? viewport.offsetTop
-            : 0;
+        lastScrollY = scrollY;
 
-        const shouldFix =
-            window.scrollY + visibleTop > headerStart;
-
-        if (shouldFix) {
+        if (scrollY > headerStart) {
             headerPlaceholder.style.height =
                 stickyHeader.offsetHeight + "px";
 
             stickyHeader.classList.add("isFixed");
-            stickyHeader.style.top = visibleTop + "px";
         } else {
             stickyHeader.classList.remove("isFixed");
-            stickyHeader.style.top = "";
             headerPlaceholder.style.height = "0px";
         }
+
+        // Always keep the header at the top
+        stickyHeader.style.top = "0px";
     }
 
     window.addEventListener("scroll", updateHeaderPosition, {
@@ -1442,16 +1446,5 @@ if (stickyHeader && headerPlaceholder) {
 
     window.addEventListener("resize", updateHeaderPosition);
 
-    document.getElementById("guessInput").addEventListener("blur", () => {
-        stickyHeader.style.top = "0px";
-        updateHeaderPosition();
-    });
-
-    if (viewport) {
-        viewport.addEventListener("scroll", updateHeaderPosition);
-        viewport.addEventListener("resize", updateHeaderPosition);
-    }
-
     updateHeaderPosition();
 }
-
