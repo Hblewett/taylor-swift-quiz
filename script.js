@@ -1413,10 +1413,10 @@ if (stickyHeader && headerPlaceholder) {
         const headerStart =
             headerPlaceholder.getBoundingClientRect().top + window.scrollY;
 
-        const keyboardOpen =
-            document.activeElement === document.getElementById("guessInput");
+        const keyboardOpen = viewport &&
+            viewport.height < window.innerHeight - 150;
 
-        const visibleTop = keyboardOpen && viewport
+        const visibleTop = keyboardOpen
             ? viewport.offsetTop
             : 0;
 
