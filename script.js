@@ -1401,26 +1401,34 @@ function closeHelp() {
     document.getElementById("helpOverlay").style.display = "none";
 }
 
-/* Keep quiz controls visible when scrolling, including on mobile */
+
+/* Keep quiz controls visible, including with the iPhone keyboard */
 const stickyHeader = document.querySelector(".stickyHeader");
 const headerPlaceholder = document.getElementById("headerPlaceholder");
 
 if (stickyHeader && headerPlaceholder) {
-    let headerStart = 0;
+    const viewport = window.visualViewport;
 
     function updateHeaderPosition() {
-        if (!stickyHeader.classList.contains("isFixed")) {
-            headerStart = headerPlaceholder.getBoundingClientRect().top
-                + window.scrollY;
-        }
+        const headerStart =
+            headerPlaceholder.getBoundingClientRect().top + window.scrollY;
 
-        if (window.scrollY > headerStart) {
+        const visibleTop = viewport
+            ? viewport.offsetTop
+            : 0;
+
+        const shouldFix =
+            window.scrollY + visibleTop > headerStart;
+
+        if (shouldFix) {
             headerPlaceholder.style.height =
                 stickyHeader.offsetHeight + "px";
 
             stickyHeader.classList.add("isFixed");
+            stickyHeader.style.top = visibleTop + "px";
         } else {
             stickyHeader.classList.remove("isFixed");
+            stickyHeader.style.top = "";
             headerPlaceholder.style.height = "0px";
         }
     }
@@ -1431,5 +1439,11 @@ if (stickyHeader && headerPlaceholder) {
 
     window.addEventListener("resize", updateHeaderPosition);
 
+    if (viewport) {
+        viewport.addEventListener("scroll", updateHeaderPosition);
+        viewport.addEventListener("resize", updateHeaderPosition);
+    }
+
     updateHeaderPosition();
 }
+
