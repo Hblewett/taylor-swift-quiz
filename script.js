@@ -1402,49 +1402,33 @@ function closeHelp() {
 }
 
 
-
-/* Keep quiz controls visible while scrolling */
+/* Keep the quiz header visible while scrolling */
 const stickyHeader = document.querySelector(".stickyHeader");
 const headerPlaceholder = document.getElementById("headerPlaceholder");
-const guessInput = document.getElementById("guessInput");
 
 if (stickyHeader && headerPlaceholder) {
 
     const headerStart =
         headerPlaceholder.getBoundingClientRect().top + window.scrollY;
 
-    let lastScrollY = window.scrollY;
-
     function updateHeaderPosition() {
-        const scrollY = window.scrollY;
 
-        // Close the keyboard when scrolling upward
-        if (scrollY < lastScrollY - 5 &&
-            document.activeElement === guessInput) {
-            guessInput.blur();
-        }
+        if (window.scrollY > headerStart) {
+            if (!stickyHeader.classList.contains("isFixed")) {
+                headerPlaceholder.style.height =
+                    stickyHeader.offsetHeight + "px";
 
-        lastScrollY = scrollY;
-
-        if (scrollY > headerStart) {
-            headerPlaceholder.style.height =
-                stickyHeader.offsetHeight + "px";
-
-            stickyHeader.classList.add("isFixed");
+                stickyHeader.classList.add("isFixed");
+            }
         } else {
             stickyHeader.classList.remove("isFixed");
             headerPlaceholder.style.height = "0px";
         }
-
-        // Always keep the header at the top
-        stickyHeader.style.top = "0px";
     }
 
     window.addEventListener("scroll", updateHeaderPosition, {
         passive: true
     });
-
-    window.addEventListener("resize", updateHeaderPosition);
 
     updateHeaderPosition();
 }
